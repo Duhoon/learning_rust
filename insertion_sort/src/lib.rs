@@ -4,12 +4,12 @@ pub fn add(mut arr: Vec<usize> ) -> Vec<usize> {
     for i in 1..length {
         let key = arr[i];
         
-        let mut j = i - 1 ;
-        while j > 0 && arr[j] > key {
-            arr[j+1] = arr[j];
+        let mut j : usize = i ;
+        while j > 0 && arr[j-1] > key {
+            arr[j] = arr[j-1];
             j = j - 1;
         }
-        arr[j+1] = key;
+        arr[j] = key;
     }
 
     arr
