@@ -11,7 +11,6 @@ pub fn add(mut arr: Vec<usize> ) -> Vec<usize> {
         }
         arr[j] = key;
     }
-
     arr
 }
 
