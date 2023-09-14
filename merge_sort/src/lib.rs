@@ -8,10 +8,11 @@ fn merge_sort(mut arr: Vec<usize>, p: usize, r: usize) -> Vec<usize> {
     }
 
     let q = (p + r) / 2;
-    merge_sort(arr, p, q);
-    merge_sort(arr, q + 1, r);
+    arr = merge_sort(arr, p, q);
+    arr = merge_sort(arr, q + 1, r);
 
-    merge(arr, p, q, r);
+    arr = merge(arr, p, q, r);
+    println!("{:?}", arr);
 
     arr
 }
@@ -28,7 +29,7 @@ fn merge(mut arr: Vec<usize>, p: usize, q: usize, r: usize) -> Vec<usize> {
     }
 
     for i in 0..right_length {
-        left_array[i] = arr[q+i];
+        right_array[i] = arr[q + i + 1];
     }
 
     let mut i = 0;
@@ -40,7 +41,7 @@ fn merge(mut arr: Vec<usize>, p: usize, q: usize, r: usize) -> Vec<usize> {
             arr[k] = left_array[i];
             i = i + 1;
         } else {
-            arr[k] = left_array[j];
+            arr[k] = right_array[j];
             j = j + 1;
         }
         k = k + 1;
@@ -53,7 +54,7 @@ fn merge(mut arr: Vec<usize>, p: usize, q: usize, r: usize) -> Vec<usize> {
     }
 
     while j < right_length {
-        arr[k] = right_array[i];
+        arr[k] = right_array[j];
         j = j + 1;
         k = k + 1;
     }
@@ -66,8 +67,14 @@ mod tests {
     use super::*;
 
     #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    fn test_1() {
+        let arr = vec![9, 8, 7, 6, 5, 4, 3, 2];
+        let new_arr = merge_sort(arr, 0, 7);
+    }
+
+    #[test]
+    fn test_2(){
+        let arr = vec![11, 5, 4, 7, 1, 2, 3, 9];
+        let new_arr = merge_sort(arr, 0, 7);
     }
 }
